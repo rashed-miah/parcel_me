@@ -4,7 +4,7 @@ const ReviewCard = ({ review, active }) => {
   return (
     <div
       className={`rounded-2xl p-6 transition-all duration-300
-      ${active ? "bg-white shadow-xl scale-100" : "bg-gray-100 scale-90 opacity-50"}`}
+      ${active ? "bg-white shadow-2xl scale-105" : "bg-gray-100 scale-80 opacity-50"}`}
     >
       {/* Quote Icon */}
       <div className="text-4xl text-[#CAEB66] mb-4">

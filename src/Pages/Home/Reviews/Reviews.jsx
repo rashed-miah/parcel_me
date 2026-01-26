@@ -107,7 +107,7 @@ const reviews = [
 export default function Reviews() {
   return (
     <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 text-center">
+      <div className=" px-4 text-center">
         {/* Top Image */}
         <img
           src={customer}

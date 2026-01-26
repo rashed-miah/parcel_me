@@ -7,6 +7,7 @@ import BrandsMarquee from "../BrandsMarquee/BrandsMarquee";
 import Features from "../Features/Features";
 import BeAMerchant from "../BeAMerchant/BeAMerchant";
 import Reviews from "../Reviews/Reviews";
+import Faq from "../FAQ/Faq";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <Features></Features>
       <BeAMerchant></BeAMerchant>
       <Reviews></Reviews>
+      <Faq></Faq>
     </div>
   );
 };
