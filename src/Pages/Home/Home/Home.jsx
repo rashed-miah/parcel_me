@@ -6,6 +6,7 @@ import Services from "../Services/Services";
 import BrandsMarquee from "../BrandsMarquee/BrandsMarquee";
 import Features from "../Features/Features";
 import BeAMerchant from "../BeAMerchant/BeAMerchant";
+import Reviews from "../Reviews/Reviews";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <BrandsMarquee></BrandsMarquee>
       <Features></Features>
       <BeAMerchant></BeAMerchant>
+      <Reviews></Reviews>
     </div>
   );
 };
