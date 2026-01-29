@@ -9,7 +9,7 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="about">About Us</NavLink>
+        <NavLink to="/about">About Us</NavLink>
       </li>
     </>
   );
@@ -49,7 +49,9 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <button className="btn rounded">
+          <NavLink to="/login">Sign In</NavLink>
+        </button>
       </div>
     </div>
   );
