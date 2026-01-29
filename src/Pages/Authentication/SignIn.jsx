@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  // hook form
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="card w-full max-w-md  bg-base-100 sm:p-4 lg:p-6">
@@ -11,7 +23,7 @@ const SignIn = () => {
         <p className=" text-gray-500 text-xl mb-6">Login with PickUp</p>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Email */}
           <div>
             <label className="label">
@@ -21,9 +33,12 @@ const SignIn = () => {
               type="email"
               placeholder="Enter your email"
               className="input input-bordered w-full"
-              required
+              {...register("email", { required: true })}
             />
           </div>
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">This field is required</p>
+          )}
 
           {/* Password with Eye Icon */}
           <div>
@@ -36,6 +51,7 @@ const SignIn = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 className="input input-bordered w-full pr-12"
+                required
               />
 
               <button

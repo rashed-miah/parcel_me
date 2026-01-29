@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hook/useAuth";
+import { useForm } from "react-hook-form";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { name } = useAuth();
   console.log(name);
+
+  // hook form
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="card w-full max-w-md  bg-base-100 sm:p-4 lg:p-6">
@@ -14,7 +27,7 @@ const Register = () => {
         <p className=" text-gray-500 text-xl mb-6">Register with PickUp</p>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Name field */}
           <div>
             <label className="label">
@@ -24,9 +37,12 @@ const Register = () => {
               type="text"
               placeholder="Name"
               className="input input-bordered w-full"
-              required
+              {...register("name", { required: true })}
             />
           </div>
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">This field is required</p>
+          )}
 
           {/* Email */}
           <div>
@@ -37,10 +53,12 @@ const Register = () => {
               type="email"
               placeholder="Enter your email"
               className="input input-bordered w-full"
-              required
+              {...register("email", { required: true })}
             />
           </div>
-
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">This field is required</p>
+          )}
           {/* Password with Eye Icon */}
           <div>
             <label className="label">
@@ -52,8 +70,30 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 className="input input-bordered w-full pr-12"
-              />
+                {...register("password", {
+                  required: true,
+                  minLength: 7,
 
+                  pattern:
+                    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{7,}$/,
+                })}
+              />
+              {errors.password?.type === "required" && (
+                <p className="text-red-500 text-sm mt-1">
+                  This field is requird
+                </p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Password must be 7 characters
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-500 text-sm mt-1">
+                  password must be contain one uppercase letter, one lowercase
+                  letter, one number, and one special character.
+                </p>
+              )}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
