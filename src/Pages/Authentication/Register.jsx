@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hook/useAuth";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { name } = useAuth();
-  console.log(name);
-
+  const { createUser } = useAuth();
+  const navigate = useNavigate();
   // hook form
   const {
     register,
@@ -16,7 +17,19 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("from regiser", data.email, data.password);
+    createUser(data.email, data.password)
+      .then(() => {
+        toast.success("Registration successful!");
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
   };
 
   return (

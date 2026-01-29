@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router";
 import ParcelPointLogo from "./ParcelPointLogo/ParcelPointLogo";
+import useAuth from "../Hook/useAuth";
 
 const Navbar = () => {
+  const { user } = useAuth();
   const navItems = (
     <>
       <li>
@@ -49,9 +51,20 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <button className="btn rounded">
-          <NavLink to="/login">Sign In</NavLink>
-        </button>
+        {user ? (
+          <button className="btn rounded">
+            <NavLink to="">LogOut</NavLink>
+          </button>
+        ) : (
+          <>
+            <button className="btn rounded mr-2">
+              <NavLink to="/login">Sign In</NavLink>
+            </button>
+            <button className="btn rounded">
+              <NavLink to="/register">Register</NavLink>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
