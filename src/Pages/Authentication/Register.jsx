@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser } = useAuth();
+  const { createUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
   // hook form
   const {
@@ -21,6 +21,20 @@ const Register = () => {
     createUser(data.email, data.password)
       .then(() => {
         toast.success("Registration successful!");
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
+  const hangleGoogle = () => {
+    googleSignIn()
+      .then((res) => {
+        toast.success("Wellcome back!");
         navigate("/");
       })
       .catch((error) => {
@@ -130,7 +144,10 @@ const Register = () => {
         <div className="divider">OR</div>
 
         {/* Google Login */}
-        <button className="btn btn-outline w-full flex items-center gap-2">
+        <button
+          onClick={hangleGoogle}
+          className="btn btn-outline w-full flex items-center gap-2"
+        >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="Google"

@@ -8,6 +8,16 @@ import "aos/dist/aos.css";
 import Aos from "aos";
 import AuthProvider from "./Context/AuthProvider.jsx";
 import { Toaster } from "react-hot-toast";
+import L from "leaflet";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import "leaflet/dist/leaflet.css";
+
+L.Marker.prototype.options.icon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+
 Aos.init();
 createRoot(document.getElementById("root")).render(
   <StrictMode>

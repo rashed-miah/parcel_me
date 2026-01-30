@@ -1,22 +1,49 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import ParcelPointLogo from "./ParcelPointLogo/ParcelPointLogo";
 import useAuth from "../Hook/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
   const navItems = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
+
+      <li>
+        <NavLink to="/coverage">Coverage</NavLink>
+      </li>
+
       <li>
         <NavLink to="/about">About Us</NavLink>
       </li>
     </>
   );
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged out",
+          text: "Logout successfully",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
   return (
-    <div className="navbar bg-base-100 sticky top-0 z-100 shadow-md h-16 rounded-2xl">
+    <div className="navbar bg-base-100 sticky top-0 z-40 shadow-md h-16 rounded-2xl">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,7 +79,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <button className="btn rounded">
+          <button onClick={handleLogOut} className="btn rounded">
             <NavLink to="">LogOut</NavLink>
           </button>
         ) : (

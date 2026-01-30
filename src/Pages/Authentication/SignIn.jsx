@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/useAuth";
@@ -7,11 +7,13 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
-  const { loginUser, user, loading } = useAuth();
-  console.log(user);
+  const { loginUser, googleSignIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   // hook form
   const {
     register,
@@ -25,7 +27,21 @@ const SignIn = () => {
     loginUser(data.email, data.password)
       .then((res) => {
         toast.success("Wellcome back!");
-        navigate("/");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
+  const hangleGoogle = () => {
+    googleSignIn()
+      .then((res) => {
+        toast.success("Wellcome back!");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         Swal.fire({
@@ -104,7 +120,10 @@ const SignIn = () => {
         <div className="divider">OR</div>
 
         {/* Google Login */}
-        <button className="btn btn-outline w-full flex items-center gap-2">
+        <button
+          onClick={hangleGoogle}
+          className="btn btn-outline w-full flex items-center gap-2"
+        >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="Google"
