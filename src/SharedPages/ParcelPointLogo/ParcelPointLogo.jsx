@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 const ParcelPointLogo = () => {
   return (
     <div>
-      <NavLink>
+      <NavLink to="/">
         <div className="flex">
           <img
             className="w-8 h-8 md:w-8 md:h-12"

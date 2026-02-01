@@ -7,18 +7,41 @@ import Swal from "sweetalert2";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
+  const linkClass = ({ isActive }) =>
+    `flex items-center mr-2 text-base md:text-xl rounded-lg px-3 py-1
+   ${isActive ? "bg-primary " : "hover:bg-primary "}`;
   const navItems = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink className={linkClass} to="/">
+          Home
+        </NavLink>
       </li>
 
       <li>
-        <NavLink to="/coverage">Coverage</NavLink>
+        <NavLink className={linkClass} to="/coverage">
+          Coverage
+        </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink className={linkClass} to="/sendparcel">
+            Send a Parcel
+          </NavLink>
+        </li>
+      )}
+      {user && (
+        <li>
+          <NavLink className={linkClass} to="/dashboard">
+            Dashboard
+          </NavLink>
+        </li>
+      )}
 
       <li>
-        <NavLink to="/about">About Us</NavLink>
+        <NavLink className={linkClass} to="/about">
+          About Us
+        </NavLink>
       </li>
     </>
   );
@@ -75,7 +98,7 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navItems}</ul>
+        <ul className="menu menu-horizontal px-2 gap-2">{navItems}</ul>
       </div>
       <div className="navbar-end">
         {user ? (
