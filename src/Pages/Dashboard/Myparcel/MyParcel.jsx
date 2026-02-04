@@ -11,6 +11,7 @@ import {
   FaMoneyBill,
 } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 const handleCopy = (trackingId) => {
   navigator.clipboard.writeText(trackingId);
   Swal.fire({
@@ -24,6 +25,7 @@ const handleCopy = (trackingId) => {
 const MyParcel = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosInstance();
+  const navigate = useNavigate();
 
   // get data by tanstack query
   const {
@@ -45,7 +47,9 @@ const MyParcel = () => {
     );
   }
 
-  console.log("querydata", myParcelData);
+  const handlePayment = (parcelId) => {
+    navigate(`/dashboard/payment/${parcelId}`);
+  };
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -186,6 +190,7 @@ const MyParcel = () => {
                     {/* PAY */}
                     {parcel.paymentStatus === "unpaid" && (
                       <button
+                        onClick={() => handlePayment(parcel._id)}
                         className="p-2 rounded bg-green-100 text-green-600 hover:bg-green-600 hover:text-white transition"
                         title="Pay Now"
                       >
