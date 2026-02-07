@@ -12,7 +12,7 @@ const Authlayout = () => {
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="hero-content flex flex-col  md:flex-row-reverse gap-6 w-full max-w-6xl">
           {/* Animation */}
-          <div className="flex-1 flex justify-center pt-4 sm:pt-8 md:pt-14 lg:pt-20">
+          <div className="flex-1 flex justify-center pt-4 sm:pt-8 md:pt-44 lg:pt-60">
             <Lottie
               animationData={signAnimation}
               className="

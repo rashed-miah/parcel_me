@@ -93,9 +93,9 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <NavLink to="/">
+        <span to="/">
           <ParcelPointLogo></ParcelPointLogo>
-        </NavLink>
+        </span>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-2 gap-2">{navItems}</ul>

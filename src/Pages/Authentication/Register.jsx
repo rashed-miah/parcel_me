@@ -1,25 +1,81 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import React, { useRef, useState } from "react";
+import { Await, Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hook/useAuth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import axios from "axios";
+import UseAxiosPublic from "../../Hook/UseAxiosPublic";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState("");
+  const fileRef = useRef(null);
+  const { updateUserProfile } = useAuth();
+  const axiosInstance = UseAxiosPublic();
+
+  // click circle → open file dialog
+  const handleOpenFile = () => {
+    fileRef.current.click();
+  };
+  // upload to imgbb
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    console.log("handle image upload");
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_Upload_Key}`,
+        formData,
+      );
+      console.log("image url", res.data.data.url);
+      setImageUrl(res.data.data.url);
+    } catch (err) {
+      console.error("Upload failed", err);
+    }
+  };
+
+  // remove image
+  const handleRemove = () => {
+    setImageUrl("");
+    fileRef.current.value = "";
+  };
+
   // hook form
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    console.log("from regiser", data.email, data.password);
     createUser(data.email, data.password)
       .then(() => {
+        // for update user profile
+        const updateProfile = {
+          displayName: data.name,
+          photoURL: imageUrl,
+        };
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+          role: "user",
+          createdAt: new Date().toISOString(),
+          lastLoginAt: new Date().toISOString(),
+        };
+
+        axiosInstance
+          .post("/users", userInfo)
+          .then((res) => console.log("userInfo", res.data));
+
+        updateUserProfile(updateProfile);
         toast.success("Registration successful!");
         navigate("/");
       })
@@ -34,6 +90,18 @@ const Register = () => {
   const hangleGoogle = () => {
     googleSignIn()
       .then((res) => {
+        const user = res.user;
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          role: "user",
+          createdAt: new Date().toISOString(),
+          lastLoginAt: new Date().toISOString(),
+        };
+        // post user data in db
+        axiosInstance
+          .post("/users", userInfo)
+          .then((res) => console.log("userInfo", res.data));
         toast.success("Wellcome back!");
         navigate("/");
       })
@@ -55,6 +123,45 @@ const Register = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* upload image here */}
+          <div className="flex flex-col items-center md:items-start">
+            <h2 className="mb-2 pl-2">Upload image</h2>
+
+            {/* hidden input */}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileRef}
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
+
+            {/* clickable avatar */}
+            <div
+              onClick={handleOpenFile}
+              className="w-28 h-28 rounded-full border-4 border-gray-300 overflow-hidden cursor-pointer mt-5 "
+            >
+              <img
+                src={
+                  imageUrl ||
+                  "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                }
+                alt="upload"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* remove button */}
+            {imageUrl && (
+              <button
+                onClick={handleRemove}
+                className="rounded mt-2 text-sm text-red-500 px-4 py-2 bg: bg-gray-100 hover:bg-gray-200 hover:underline"
+              >
+                Remove Image
+              </button>
+            )}
+          </div>
+
           {/* Name field */}
           <div>
             <label className="label">

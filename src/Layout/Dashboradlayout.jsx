@@ -64,7 +64,7 @@ const DashboardLayout = () => {
             </li>
 
             <li>
-              <NavLink to="/payment-history" className={linkClass}>
+              <NavLink to="/dashboard/paymentHistory" className={linkClass}>
                 <FaMoneyBillWave className="text-lg" />
                 Payment History
               </NavLink>
