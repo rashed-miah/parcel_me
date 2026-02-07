@@ -11,6 +11,9 @@ import Dashboradlayout from "../Layout/Dashboradlayout";
 import MyParcel from "../Pages/Dashboard/Myparcel/MyParcel";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory/PaymentHistory";
+import BeARider from "../Pages/BeARider/BeARider";
+import PendingRiders from "../Pages/Dashboard/PendingRiders/PendingRiders";
+import ActiveRiders from "../Pages/ActiveRiders/ActiveRiders";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +28,15 @@ export const router = createBrowserRouter([
         path: "coverage",
         element: <CoveragePage></CoveragePage>,
         loader: () => fetch("./serviceCenters.json"),
+      },
+      {
+        path: "be-a-rider",
+        element: (
+          <PrivateRoutes>
+            {" "}
+            <BeARider></BeARider>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "sendparcel",
@@ -66,6 +78,14 @@ export const router = createBrowserRouter([
       {
         path: "paymentHistory",
         Component: PaymentHistory,
+      },
+      {
+        path: "active-riders",
+        Component: ActiveRiders,
+      },
+      {
+        path: "pending-riders",
+        Component: PendingRiders,
       },
     ],
   },

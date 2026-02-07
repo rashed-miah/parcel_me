@@ -7,6 +7,8 @@ import {
   FaSearchLocation,
   FaUserEdit,
   FaCog,
+  FaUserCheck,
+  FaUserClock,
 } from "react-icons/fa";
 import ParcelPointLogo from "../SharedPages/ParcelPointLogo/ParcelPointLogo";
 
@@ -74,6 +76,19 @@ const DashboardLayout = () => {
               <NavLink to="/trace-parcel" className={linkClass}>
                 <FaSearchLocation className="text-lg" />
                 Trace a Parcel
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/active-riders" className={linkClass}>
+                <FaUserCheck className="text-lg" />
+                Active Riders
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/dashboard/pending-riders" className={linkClass}>
+                <FaUserClock className="text-lg" />
+                Pending Riders
               </NavLink>
             </li>
 

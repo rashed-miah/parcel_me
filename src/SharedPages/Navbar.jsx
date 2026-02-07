@@ -37,6 +37,13 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
+      {user && (
+        <li>
+          <NavLink className={linkClass} to="/be-a-rider">
+            Be A Rider
+          </NavLink>
+        </li>
+      )}
 
       <li>
         <NavLink className={linkClass} to="/about">

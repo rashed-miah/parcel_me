@@ -49,6 +49,7 @@ const SendParcel = () => {
   const [parcelType, setParcelType] = useState("non-document");
   const { user } = useAuth();
   const axiosSecure = useAxiosInstance();
+  console.log("user", user);
 
   const {
     register,
