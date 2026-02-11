@@ -124,7 +124,7 @@ const SendParcel = () => {
           parcelType,
           trackingId,
           totalCost: price.total,
-          deliveryStatus: "pending",
+          deliveryStatus: "not-collected",
           paymentStatus: "unpaid",
           createdAt: new Date().toISOString(),
           created_by: user.email,

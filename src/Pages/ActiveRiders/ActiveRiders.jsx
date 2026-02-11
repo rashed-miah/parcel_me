@@ -51,7 +51,12 @@ const ActiveRiders = () => {
     r.name.toLowerCase().includes(search.toLowerCase()),
   );
 
-  if (isLoading) return <span className="loading loading-spinner" />;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
 
   return (
     <div className="p-6">

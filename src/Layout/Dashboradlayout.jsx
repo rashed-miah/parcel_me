@@ -9,10 +9,13 @@ import {
   FaCog,
   FaUserCheck,
   FaUserClock,
+  FaUserShield,
 } from "react-icons/fa";
 import ParcelPointLogo from "../SharedPages/ParcelPointLogo/ParcelPointLogo";
+import useUserRole from "../Hook/useUserRole";
 
 const DashboardLayout = () => {
+  const { role } = useUserRole();
   const linkClass = ({ isActive }) =>
     `flex items-center gap-2 px-3 py-2 text-sm rounded transition
    ${isActive ? "bg-primary  font-semibold" : "hover:bg-primary "}`;
@@ -78,20 +81,29 @@ const DashboardLayout = () => {
                 Trace a Parcel
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard/active-riders" className={linkClass}>
-                <FaUserCheck className="text-lg" />
-                Active Riders
-              </NavLink>
-            </li>
+            {role == "admin" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/active-riders" className={linkClass}>
+                    <FaUserCheck className="text-lg" />
+                    Active Riders
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink to="/dashboard/pending-riders" className={linkClass}>
-                <FaUserClock className="text-lg" />
-                Pending Riders
-              </NavLink>
-            </li>
-
+                <li>
+                  <NavLink to="/dashboard/pending-riders" className={linkClass}>
+                    <FaUserClock className="text-lg" />
+                    Pending Riders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/make-admin" className={linkClass}>
+                    <FaUserShield className="text-lg" />
+                    Make Admin
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li>
               <NavLink to="/update-profile" className={linkClass}>
                 <FaUserEdit className="text-lg" />

@@ -13,6 +13,10 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory/PaymentHistory";
 import BeARider from "../Pages/BeARider/BeARider";
 import PendingRiders from "../Pages/Dashboard/PendingRiders/PendingRiders";
+
+import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
+import AdminRoute from "../Routes/AdminRoute";
+import Forbidden from "../Pages/ForbiddenPage/Forbidden";
 import ActiveRiders from "../Pages/ActiveRiders/ActiveRiders";
 
 export const router = createBrowserRouter([
@@ -28,6 +32,10 @@ export const router = createBrowserRouter([
         path: "coverage",
         element: <CoveragePage></CoveragePage>,
         loader: () => fetch("./serviceCenters.json"),
+      },
+      {
+        path: "forbidden",
+        Component: Forbidden,
       },
       {
         path: "be-a-rider",
@@ -81,11 +89,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "active-riders",
-        Component: ActiveRiders,
+        element: (
+          <AdminRoute>
+            <ActiveRiders></ActiveRiders>
+          </AdminRoute>
+        ),
       },
       {
         path: "pending-riders",
-        Component: PendingRiders,
+        element: (
+          <AdminRoute>
+            <PendingRiders></PendingRiders>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "make-admin",
+        element: (
+          <AdminRoute>
+            <MakeAdmin></MakeAdmin>
+          </AdminRoute>
+        ),
       },
     ],
   },
