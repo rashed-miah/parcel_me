@@ -10,6 +10,7 @@ import {
   FaUserCheck,
   FaUserClock,
   FaUserShield,
+  FaUserPlus,
 } from "react-icons/fa";
 import ParcelPointLogo from "../SharedPages/ParcelPointLogo/ParcelPointLogo";
 import useUserRole from "../Hook/useUserRole";
@@ -83,6 +84,12 @@ const DashboardLayout = () => {
             </li>
             {role == "admin" && (
               <>
+                <li>
+                  <NavLink to="/dashboard/assign-rider" className={linkClass}>
+                    <FaUserPlus className="text-lg" />
+                    Assign Rider
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink to="/dashboard/active-riders" className={linkClass}>
                     <FaUserCheck className="text-lg" />
