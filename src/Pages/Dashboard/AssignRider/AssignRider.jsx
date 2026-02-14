@@ -30,7 +30,7 @@ const AssignRider = () => {
   const loadRiders = async (parcel) => {
     try {
       const res = await axiosSecure.get(
-        `/riders/active-by-district?district=${parcel.receiverDistrict}`,
+        `/riders/active-by-district?district=${parcel.senderDistrict}`,
       );
 
       setRiders(res.data);

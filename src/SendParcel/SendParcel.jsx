@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect, useMemo, useState } from "react";
 import Swal from "sweetalert2";
@@ -50,6 +50,7 @@ const SendParcel = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosInstance();
   console.log("user", user);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -118,6 +119,7 @@ const SendParcel = () => {
       confirmButtonColor: "#84cc16",
     }).then((result) => {
       if (result.isConfirmed) {
+        navigate("/dashboard/my-parcels");
         const trackingId = generateTrackingId();
         const parcelData = {
           ...data,

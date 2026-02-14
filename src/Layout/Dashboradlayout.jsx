@@ -11,6 +11,7 @@ import {
   FaUserClock,
   FaUserShield,
   FaUserPlus,
+  FaTruck,
 } from "react-icons/fa";
 import ParcelPointLogo from "../SharedPages/ParcelPointLogo/ParcelPointLogo";
 import useUserRole from "../Hook/useUserRole";
@@ -82,6 +83,13 @@ const DashboardLayout = () => {
                 Trace a Parcel
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard/pending-deliveries" className={linkClass}>
+                <FaTruck className="text-lg" />
+                Pending Deliveries
+              </NavLink>
+            </li>
+
             {role == "admin" && (
               <>
                 <li>
