@@ -4,6 +4,7 @@ import { FaCopy } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosInstance from "../../../../Hook/useAxiosInstance";
 import useAuth from "../../../../Hook/useAuth";
+import Loader from "../../../../SharedPages/Loader";
 
 const handleCopy = (id) => {
   navigator.clipboard.writeText(id);
@@ -24,11 +25,7 @@ const PaymentHistory = () => {
   });
 
   if (isPending) {
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg text-lime-500"></span>
-      </div>
-    );
+    return <Loader></Loader>;
   }
 
   return (

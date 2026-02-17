@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosInstance";
+import useUpdateTracking from "../../../Hook/useUpdateTracking";
+import useAuth from "../../../Hook/useAuth";
 
 const PendingDeliveries = () => {
   const axiosSecure = useAxiosSecure();
+  const { updateTracking } = useUpdateTracking();
+  const { user } = useAuth();
 
   /* ---------------- FETCH RIDER PENDING ---------------- */
 
@@ -21,7 +25,7 @@ const PendingDeliveries = () => {
 
   /* ---------------- STATUS UPDATE ---------------- */
 
-  const handleStatusUpdate = async (id, status) => {
+  const handleStatusUpdate = async (parcel, status) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
       text: `Mark as ${status}?`,
@@ -32,11 +36,24 @@ const PendingDeliveries = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await axiosSecure.patch(`/parcels/rider-status/${id}`, {
-        status,
-      });
+      const res = await axiosSecure.patch(
+        `/parcels/rider-status/${parcel._id}`,
+        {
+          status,
+        },
+      );
 
       if (res.data.modifiedCount > 0) {
+        let trackingDetails = `picked up by ${user.displayName}`;
+        if (status === "completed") {
+          trackingDetails = `delivered by ${user.displayName}`;
+        }
+        await updateTracking({
+          trackingId: parcel.trackingId,
+          status: status,
+          details: trackingDetails,
+          updated_by: `parcel updated by ${user.email}`,
+        });
         console.log("modified data", status);
         Swal.fire("Success", "Status updated", "success");
         refetch();
@@ -50,8 +67,8 @@ const PendingDeliveries = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-spinner loading-xl"></span>
       </div>
     );
   }
@@ -96,7 +113,7 @@ const PendingDeliveries = () => {
                   {/* rider_assign → pickup */}
                   {p.deliveryStatus === "rider_assign" && (
                     <button
-                      onClick={() => handleStatusUpdate(p._id, "in-transit")}
+                      onClick={() => handleStatusUpdate(p, "in-transit")}
                       className="btn btn-sm btn-primary text-black"
                     >
                       Mark Picked Up
@@ -106,7 +123,7 @@ const PendingDeliveries = () => {
                   {/* in-transit → complete */}
                   {p.deliveryStatus === "in-transit" && (
                     <button
-                      onClick={() => handleStatusUpdate(p._id, "completed")}
+                      onClick={() => handleStatusUpdate(p, "completed")}
                       className="btn btn-sm btn-success text-black"
                     >
                       Mark Completed

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 import useAxiosInstance from "../Hook/useAxiosInstance";
+import useUpdateTracking from "../Hook/useUpdateTracking";
 
 const BD_PHONE_REGEX = /^(?:\+880|880|0)1[3-9]\d{8}$/;
 // generate track id
@@ -49,8 +50,8 @@ const SendParcel = () => {
   const [parcelType, setParcelType] = useState("non-document");
   const { user } = useAuth();
   const axiosSecure = useAxiosInstance();
-  console.log("user", user);
   const navigate = useNavigate();
+  const { updateTracking } = useUpdateTracking();
 
   const {
     register,
@@ -117,9 +118,8 @@ const SendParcel = () => {
       confirmButtonText: "Confirm & Proceed",
       cancelButtonText: "Edit",
       confirmButtonColor: "#84cc16",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        navigate("/dashboard/my-parcels");
         const trackingId = generateTrackingId();
         const parcelData = {
           ...data,
@@ -131,6 +131,14 @@ const SendParcel = () => {
           createdAt: new Date().toISOString(),
           created_by: user.email,
         };
+
+        await updateTracking({
+          trackingId,
+          status: "parcel_created",
+          details: `parcel created by ${user.displayName}`,
+          updated_by: `parcel updated by ${user.email}`,
+        });
+        navigate("/dashboard/my-parcels");
         // data post in server
         axiosSecure
           .post("/parcels", parcelData)

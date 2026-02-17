@@ -3,9 +3,14 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosInstance";
 
+import useUpdateTracking from "../../../Hook/useUpdateTracking";
+import useAuth from "../../../Hook/useAuth";
+import Loader from "../../../SharedPages/Loader";
+
 const AssignRider = () => {
   const axiosSecure = useAxiosSecure();
-
+  const { updateTracking } = useUpdateTracking();
+  const { user } = useAuth();
   const [selectedParcel, setSelectedParcel] = useState(null);
   const [riders, setRiders] = useState([]);
 
@@ -60,6 +65,12 @@ const AssignRider = () => {
       });
 
       Swal.fire("Success", "Rider assigned", "success");
+      await updateTracking({
+        trackingId: selectedParcel.trackingId,
+        status: "Rider has assign",
+        details: `assign to ${rider.name}`,
+        updated_by: `parcel updated by ${user.email}`,
+      });
 
       setSelectedParcel(null);
       setRiders([]);
@@ -71,12 +82,7 @@ const AssignRider = () => {
 
   /* ---------------- UI ---------------- */
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="p-6">

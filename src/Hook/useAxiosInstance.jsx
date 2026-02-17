@@ -32,6 +32,7 @@ const useAxiosSecure = () => {
 
         if (status === 401) {
           await logOut();
+          console.log("logout trigger");
           navigate("/login", { replace: true });
         }
 

@@ -20,6 +20,10 @@ import Forbidden from "../Pages/ForbiddenPage/Forbidden";
 import ActiveRiders from "../Pages/ActiveRiders/ActiveRiders";
 import AssignRider from "../Pages/Dashboard/AssignRider/AssignRider";
 import PendingDeliveries from "../Pages/Dashboard/PendingDeliveries/PendingDeliveries";
+import CompletedDeliveries from "../Pages/Dashboard/CompletedDeliveries/CompletedDeliveries";
+import RiderRoute from "../Routes/RiderRoute";
+import TrackParcel from "../Pages/TraceParcel/TraceParcel";
+import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +82,10 @@ export const router = createBrowserRouter([
     element: <Dashboradlayout></Dashboradlayout>,
     children: [
       {
+        index: true,
+        element: <DashboardHome></DashboardHome>,
+      },
+      {
         path: "my-parcels",
         element: <MyParcel></MyParcel>,
       },
@@ -86,12 +94,28 @@ export const router = createBrowserRouter([
         Component: Payment,
       },
       {
+        path: "trace-parcel",
+        Component: TrackParcel,
+      },
+      {
         path: "paymentHistory",
         Component: PaymentHistory,
       },
       {
         path: "pending-deliveries",
-        element: <PendingDeliveries></PendingDeliveries>,
+        element: (
+          <RiderRoute>
+            <PendingDeliveries></PendingDeliveries>
+          </RiderRoute>
+        ),
+      },
+      {
+        path: "completed-deliveries",
+        element: (
+          <RiderRoute>
+            <CompletedDeliveries></CompletedDeliveries>
+          </RiderRoute>
+        ),
       },
       {
         path: "assign-rider",

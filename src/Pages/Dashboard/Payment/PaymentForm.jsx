@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "../../../Hook/useAxiosInstance";
 import Swal from "sweetalert2";
+import useUpdateTracking from "../../../Hook/useUpdateTracking";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -13,9 +14,8 @@ const PaymentForm = () => {
   const { user } = useAuth();
   const { parcelId } = useParams();
   const axiosSecure = useAxiosInstance();
-  console.log("userID", parcelId);
   const navigate = useNavigate();
-
+  const { updateTracking } = useUpdateTracking();
   const { isPending, data: parcelData = [] } = useQuery({
     queryKey: ["parcel", parcelId],
     enabled: !!parcelId,
@@ -75,7 +75,6 @@ const PaymentForm = () => {
         });
 
         if (result.error) {
-          console.log("dora khaiso");
           setError(result.error.message);
 
           return;
@@ -98,6 +97,14 @@ const PaymentForm = () => {
           const paymentRes = await axiosSecure.post("/payments", paymentData);
 
           if (paymentRes?.data?.paymentResult?.insertedId) {
+            // post in parcel update for payment complete
+            await updateTracking({
+              trackingId: parcelData.trackingId,
+              status: "Payment completed",
+              details: `paid  by ${user.displayName}`,
+              updated_by: `parcel updated by ${user.email}`,
+            });
+
             Swal.fire({
               title: "Payment Successful!",
               html: `Transaction ID: <strong>${transactionId}</strong>`,

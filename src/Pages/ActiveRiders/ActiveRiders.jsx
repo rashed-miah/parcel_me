@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hook/useAxiosInstance";
+import Loader from "../../SharedPages/Loader";
 
 const ActiveRiders = () => {
   const axiosSecure = useAxiosSecure();
@@ -51,12 +52,7 @@ const ActiveRiders = () => {
     r.name.toLowerCase().includes(search.toLowerCase()),
   );
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="p-6">

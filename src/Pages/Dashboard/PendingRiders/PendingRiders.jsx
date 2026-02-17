@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosInstance";
+import Loader from "../../../SharedPages/Loader";
 
 const PendingRiders = () => {
   const [selectedRider, setSelectedRider] = useState(null);
@@ -46,11 +47,7 @@ const PendingRiders = () => {
   /* ---------------- LOADING ---------------- */
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg text-lime-500"></span>
-      </div>
-    );
+    return <Loader></Loader>;
   }
 
   /* ---------------- UI ---------------- */

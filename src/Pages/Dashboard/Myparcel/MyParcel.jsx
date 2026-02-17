@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import Loader from "../../../SharedPages/Loader";
 const handleCopy = (trackingId) => {
   navigator.clipboard.writeText(trackingId);
   Swal.fire({
@@ -40,11 +41,7 @@ const MyParcel = () => {
     },
   });
   if (isPending) {
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg text-lime-500"></span>
-      </div>
-    );
+    return <Loader></Loader>;
   }
 
   const handlePayment = (parcelId) => {

@@ -12,6 +12,7 @@ import {
   FaUserShield,
   FaUserPlus,
   FaTruck,
+  FaCheckCircle,
 } from "react-icons/fa";
 import ParcelPointLogo from "../SharedPages/ParcelPointLogo/ParcelPointLogo";
 import useUserRole from "../Hook/useUserRole";
@@ -78,17 +79,34 @@ const DashboardLayout = () => {
             </li>
 
             <li>
-              <NavLink to="/trace-parcel" className={linkClass}>
+              <NavLink to="/dashboard/trace-parcel" className={linkClass}>
                 <FaSearchLocation className="text-lg" />
                 Trace a Parcel
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard/pending-deliveries" className={linkClass}>
-                <FaTruck className="text-lg" />
-                Pending Deliveries
-              </NavLink>
-            </li>
+
+            {role == "rider" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/pending-deliveries"
+                    className={linkClass}
+                  >
+                    <FaTruck className="text-lg" />
+                    Pending Deliveries
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/completed-deliveries"
+                    className={linkClass}
+                  >
+                    <FaCheckCircle className="text-lg" />
+                    Completed Deliveries
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {role == "admin" && (
               <>
