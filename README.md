@@ -22,10 +22,10 @@ It supports **user authentication (Firebase)**, **parcel booking & tracking**, *
 
 ## 🖥️ Tech Stack Overview
 
-| Layer | Tools & Libraries |
-|-------|------------------|
+| Layer    | Tools & Libraries                                                                                                                                                |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Frontend | React 19, Tailwind CSS 4, Vite, React Router v7, React Query, React Hook Form, Stripe JS, Framer Motion, AOS, Lottie React, React Leaflet, Recharts, SweetAlert2 |
-| Backend | Node.js, Express, MongoDB, Firebase Admin SDK, Stripe, Nodemailer, dotenv, cors |
+| Backend  | Node.js, Express, MongoDB, Firebase Admin SDK, Stripe, Nodemailer, dotenv, cors                                                                                  |
 
 ---
 
@@ -35,56 +35,55 @@ A modern parcel management web app frontend built with **React 19**, **Tailwind 
 
 ### 📦 Tech Stack (Frontend)
 
-| Library / Tool | Purpose |
-|----------------|---------|
-| [React 19](https://react.dev/) | Core frontend framework |
-| [Tailwind CSS 4](https://tailwindcss.com/) | Utility-first styling |
-| [Vite](https://vitejs.dev/) with `@tailwindcss/vite` | Build & dev server |
-| [React Router v7](https://reactrouter.com/) | Client-side routing |
-| [React Query](https://tanstack.com/query/latest) | Data fetching & caching |
-| [React Hook Form](https://react-hook-form.com/) | Form handling & validation |
-| [Stripe JS](https://stripe.com/docs/js) | Payment processing |
-| [Framer Motion](https://www.framer.com/motion/) | Animations |
-| [AOS](https://michalsnik.github.io/aos/) | Scroll animations |
-| [Lottie React](https://github.com/LottieFiles/lottie-react) | Lottie animations |
-| [React Leaflet](https://react-leaflet.js.org/) & [Leaflet](https://leafletjs.com/) | Interactive maps |
-| [Recharts](https://recharts.org/) | Charts & data visualization |
-| [SweetAlert2](https://sweetalert2.github.io/) | Pop-up alerts |
-| [React Icons](https://react-icons.github.io/react-icons/) | Icon library |
+| Library / Tool                                                                     | Purpose                     |
+| ---------------------------------------------------------------------------------- | --------------------------- |
+| [React 19](https://react.dev/)                                                     | Core frontend framework     |
+| [Tailwind CSS 4](https://tailwindcss.com/)                                         | Utility-first styling       |
+| [Vite](https://vitejs.dev/) with `@tailwindcss/vite`                               | Build & dev server          |
+| [React Router v7](https://reactrouter.com/)                                        | Client-side routing         |
+| [React Query](https://tanstack.com/query/latest)                                   | Data fetching & caching     |
+| [React Hook Form](https://react-hook-form.com/)                                    | Form handling & validation  |
+| [Stripe JS](https://stripe.com/docs/js)                                            | Payment processing          |
+| [Framer Motion](https://www.framer.com/motion/)                                    | Animations                  |
+| [AOS](https://michalsnik.github.io/aos/)                                           | Scroll animations           |
+| [Lottie React](https://github.com/LottieFiles/lottie-react)                        | Lottie animations           |
+| [React Leaflet](https://react-leaflet.js.org/) & [Leaflet](https://leafletjs.com/) | Interactive maps            |
+| [Recharts](https://recharts.org/)                                                  | Charts & data visualization |
+| [SweetAlert2](https://sweetalert2.github.io/)                                      | Pop-up alerts               |
+| [React Icons](https://react-icons.github.io/react-icons/)                          | Icon library                |
 
 ---
 
 ## 📦 Tech Stack (Backend)
 
-| Library / Tool | Purpose |
-|----------------|---------|
-| [Express.js](https://expressjs.com/) | Server framework |
-| [MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/) | Database access |
-| [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup) | Verify Firebase ID tokens |
-| [Stripe](https://stripe.com/docs/api) | Payment processing |
-| [Nodemailer](https://nodemailer.com/about/) | Sending emails |
-| [dotenv](https://github.com/motdotla/dotenv) | Environment variables |
-| [cors](https://github.com/expressjs/cors) | Enable CORS |
+| Library / Tool                                                            | Purpose                   |
+| ------------------------------------------------------------------------- | ------------------------- |
+| [Express.js](https://expressjs.com/)                                      | Server framework          |
+| [MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/) | Database access           |
+| [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)        | Verify Firebase ID tokens |
+| [Stripe](https://stripe.com/docs/api)                                     | Payment processing        |
+| [Nodemailer](https://nodemailer.com/about/)                               | Sending emails            |
+| [dotenv](https://github.com/motdotla/dotenv)                              | Environment variables     |
+| [cors](https://github.com/expressjs/cors)                                 | Enable CORS               |
 
 ---
 
-
-| Library / Tool | Purpose |
-|----------------|---------|
-| React 19 | Core frontend framework |
-| Backend |  Node.js, Express, MongoDB, Firebase Admin SDK, Stripe, Nodemailer, dotenv, cors |
-| Vite | Build & dev server |
-| React Router v7 | Client-side routing |
-| React Query | Data fetching & caching |
-| React Hook Form | Form handling & validation |
-| Stripe JS | Payment processing |
-| Framer Motion | Animations |
-| AOS | Scroll animations |
-| Lottie React | Lottie animations |
-| React Leaflet | Interactive maps |
-| Recharts | Charts & data visualization |
-| SweetAlert2 | Pop-up alerts |
-| React Icons | Icon library |
+| Library / Tool  | Purpose                                                                         |
+| --------------- | ------------------------------------------------------------------------------- |
+| React 19        | Core frontend framework                                                         |
+| Backend         | Node.js, Express, MongoDB, Firebase Admin SDK, Stripe, Nodemailer, dotenv, cors |
+| Vite            | Build & dev server                                                              |
+| React Router v7 | Client-side routing                                                             |
+| React Query     | Data fetching & caching                                                         |
+| React Hook Form | Form handling & validation                                                      |
+| Stripe JS       | Payment processing                                                              |
+| Framer Motion   | Animations                                                                      |
+| AOS             | Scroll animations                                                               |
+| Lottie React    | Lottie animations                                                               |
+| React Leaflet   | Interactive maps                                                                |
+| Recharts        | Charts & data visualization                                                     |
+| SweetAlert2     | Pop-up alerts                                                                   |
+| React Icons     | Icon library                                                                    |
 
 ---
 
@@ -107,7 +106,7 @@ npm install
 
 
 Create a .env file:
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=https://delivery-point-server.vercel.app
 VITE_FIREBASE_API_KEY=your-firebase-api-key
 VITE_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
 VITE_FIREBASE_PROJECT_ID=your-firebase-project-id
@@ -155,3 +154,4 @@ MongoDB
 
 Developed by: Md. Rashed Miah
 Repository: https://github.com/rashed-miah/Parcel-Point
+```

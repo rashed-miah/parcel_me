@@ -1,8 +1,11 @@
 import React from "react";
 import { useLoaderData } from "react-router";
 import ServiceAreaMap from "./ServiceAreaMap";
+import { Helmet } from "react-helmet";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const CoveragePage = () => {
+  usePageTitle("Coverage");
   const serviceCenters = useLoaderData();
 
   return (

@@ -16,8 +16,10 @@ import {
 } from "react-icons/fa";
 import ParcelPointLogo from "../SharedPages/ParcelPointLogo/ParcelPointLogo";
 import useUserRole from "../Hook/useUserRole";
+import usePageTitle from "../Hook/usePageTitle";
 
 const DashboardLayout = () => {
+  usePageTitle("Dashboard");
   const { role } = useUserRole();
   const linkClass = ({ isActive }) =>
     `flex items-center gap-2 px-3 py-2 text-sm rounded transition
@@ -138,7 +140,7 @@ const DashboardLayout = () => {
               </>
             )}
             <li>
-              <NavLink to="/update-profile" className={linkClass}>
+              <NavLink to="/dashboard/update-profile" className={linkClass}>
                 <FaUserEdit className="text-lg" />
                 Update Profile
               </NavLink>

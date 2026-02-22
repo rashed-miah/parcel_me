@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosInstance";
+import usePageTitle from "../../../Hook/usePageTitle";
 
 const MakeAdmin = () => {
+  usePageTitle("Make Admin");
   const axiosSecure = useAxiosSecure();
 
   /* ---------------- STATE ---------------- */

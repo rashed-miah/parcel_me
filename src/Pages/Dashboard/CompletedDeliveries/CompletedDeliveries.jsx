@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosInstance";
+import usePageTitle from "../../../Hook/usePageTitle";
 
 const CompletedDeliveries = () => {
+  usePageTitle("Complete Deliveries");
   const axiosSecure = useAxiosSecure();
   const [cashAmount, setCashAmount] = useState("");
 

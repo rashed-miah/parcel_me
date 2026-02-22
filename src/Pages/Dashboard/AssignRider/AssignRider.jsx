@@ -6,8 +6,10 @@ import useAxiosSecure from "../../../Hook/useAxiosInstance";
 import useUpdateTracking from "../../../Hook/useUpdateTracking";
 import useAuth from "../../../Hook/useAuth";
 import Loader from "../../../SharedPages/Loader";
+import usePageTitle from "../../../Hook/usePageTitle";
 
 const AssignRider = () => {
+  usePageTitle("Assign Riders");
   const axiosSecure = useAxiosSecure();
   const { updateTracking } = useUpdateTracking();
   const { user } = useAuth();

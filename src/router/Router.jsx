@@ -25,6 +25,7 @@ import RiderRoute from "../Routes/RiderRoute";
 import TrackParcel from "../Pages/TraceParcel/TraceParcel";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
       {
         path: "paymentHistory",
         Component: PaymentHistory,
+      },
+      {
+        path: "update-profile",
+        Component: UpdateProfile,
       },
       {
         path: "pending-deliveries",

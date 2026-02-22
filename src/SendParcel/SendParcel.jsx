@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 import useAxiosInstance from "../Hook/useAxiosInstance";
 import useUpdateTracking from "../Hook/useUpdateTracking";
+import usePageTitle from "../Hook/usePageTitle";
 
 const BD_PHONE_REGEX = /^(?:\+880|880|0)1[3-9]\d{8}$/;
 // generate track id
@@ -46,6 +47,7 @@ const calculatePrice = ({
 };
 
 const SendParcel = () => {
+  usePageTitle("Send Parcel");
   const serviceCenters = useLoaderData();
   const [parcelType, setParcelType] = useState("non-document");
   const { user } = useAuth();

@@ -3,8 +3,10 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hook/useAxiosInstance";
 import Loader from "../../SharedPages/Loader";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const ActiveRiders = () => {
+  usePageTitle("Active Riders");
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
 

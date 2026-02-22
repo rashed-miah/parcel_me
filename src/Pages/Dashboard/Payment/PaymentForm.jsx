@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "../../../Hook/useAxiosInstance";
 import Swal from "sweetalert2";
 import useUpdateTracking from "../../../Hook/useUpdateTracking";
+import { Helmet } from "react-helmet";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -97,6 +98,14 @@ const PaymentForm = () => {
           const paymentRes = await axiosSecure.post("/payments", paymentData);
 
           if (paymentRes?.data?.paymentResult?.insertedId) {
+            await axiosSecure.post("/send-payment-email", {
+              transactionId,
+              parcelName: parcelData?.parcelName,
+              amount: parcelData.totalCost,
+              email: user?.email,
+              userName: user?.displayName,
+            });
+
             // post in parcel update for payment complete
             await updateTracking({
               trackingId: parcelData.trackingId,

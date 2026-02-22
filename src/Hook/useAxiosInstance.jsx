@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://delivery-point-server.vercel.app",
 });
 
 const useAxiosSecure = () => {
@@ -32,7 +32,7 @@ const useAxiosSecure = () => {
 
         if (status === 401) {
           await logOut();
-          console.log("logout trigger");
+
           navigate("/login", { replace: true });
         }
 

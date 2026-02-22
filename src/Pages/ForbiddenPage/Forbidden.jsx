@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaBan, FaArrowLeft } from "react-icons/fa";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const Forbidden = () => {
+  usePageTitle("Forbidden ");
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-base-200 px-4 rounded-2xl my-4 text-center">
       <FaBan className="text-red-500 text-6xl mb-4" />

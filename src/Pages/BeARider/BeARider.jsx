@@ -5,8 +5,10 @@ import Swal from "sweetalert2";
 
 import useAxiosSecure from "../../Hook/useAxiosInstance";
 import useAuth from "../../Hook/useAuth";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const BeARider = () => {
+  usePageTitle("Be A Rider");
   const {
     register,
     handleSubmit,
@@ -32,7 +34,6 @@ const BeARider = () => {
         setRegions(uniqueRegions);
       });
   }, []);
-  console.log("regions", regions);
 
   useEffect(() => {
     if (selectedRegion) {

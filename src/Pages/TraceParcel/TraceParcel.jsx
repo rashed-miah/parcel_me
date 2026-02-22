@@ -3,8 +3,10 @@ import { FaSearch, FaMapMarkerAlt, FaClock, FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hook/useAxiosInstance";
 import Loader from "../../SharedPages/Loader";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const TraceParcel = () => {
+  usePageTitle("Track Parcel");
   const axiosSecure = useAxiosSecure();
   const [trackingId, setTrackingId] = useState("");
   const [records, setRecords] = useState([]);

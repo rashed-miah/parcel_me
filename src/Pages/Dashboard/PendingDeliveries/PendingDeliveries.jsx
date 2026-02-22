@@ -3,8 +3,10 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosInstance";
 import useUpdateTracking from "../../../Hook/useUpdateTracking";
 import useAuth from "../../../Hook/useAuth";
+import usePageTitle from "../../../Hook/usePageTitle";
 
 const PendingDeliveries = () => {
+  usePageTitle("Pending Deliveries");
   const axiosSecure = useAxiosSecure();
   const { updateTracking } = useUpdateTracking();
   const { user } = useAuth();
@@ -54,11 +56,12 @@ const PendingDeliveries = () => {
           details: trackingDetails,
           updated_by: `parcel updated by ${user.email}`,
         });
-        console.log("modified data", status);
+
         Swal.fire("Success", "Status updated", "success");
         refetch();
       }
     } catch (err) {
+      console.log(err);
       Swal.fire("Error", "Failed to update", "error");
     }
   };

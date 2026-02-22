@@ -13,6 +13,7 @@ import {
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import Loader from "../../../SharedPages/Loader";
+import usePageTitle from "../../../Hook/usePageTitle";
 const handleCopy = (trackingId) => {
   navigator.clipboard.writeText(trackingId);
   Swal.fire({
@@ -24,6 +25,7 @@ const handleCopy = (trackingId) => {
   });
 };
 const MyParcel = () => {
+  usePageTitle("My Parcels");
   const { user } = useAuth();
   const axiosSecure = useAxiosInstance();
   const navigate = useNavigate();

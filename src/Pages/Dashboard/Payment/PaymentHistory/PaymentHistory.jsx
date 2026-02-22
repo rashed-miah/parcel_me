@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosInstance from "../../../../Hook/useAxiosInstance";
 import useAuth from "../../../../Hook/useAuth";
 import Loader from "../../../../SharedPages/Loader";
+import usePageTitle from "../../../../Hook/usePageTitle";
 
 const handleCopy = (id) => {
   navigator.clipboard.writeText(id);
@@ -12,6 +13,7 @@ const handleCopy = (id) => {
 };
 
 const PaymentHistory = () => {
+  usePageTitle("Payment History");
   const axiosSecure = useAxiosInstance();
   const { user } = useAuth();
 

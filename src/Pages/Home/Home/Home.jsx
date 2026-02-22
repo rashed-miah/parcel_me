@@ -8,8 +8,10 @@ import Features from "../Features/Features";
 import BeAMerchant from "../BeAMerchant/BeAMerchant";
 import Reviews from "../Reviews/Reviews";
 import Faq from "../FAQ/Faq";
+import usePageTitle from "../../../Hook/usePageTitle";
 
 const Home = () => {
+  usePageTitle("Home");
   return (
     <div>
       <Banner></Banner>

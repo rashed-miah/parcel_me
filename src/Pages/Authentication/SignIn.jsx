@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const SignIn = () => {
+  usePageTitle("Login");
   const { loginUser, googleSignIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -23,7 +25,6 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("from sign in", data.email, data.password);
     loginUser(data.email, data.password)
       .then((res) => {
         toast.success("Wellcome back!");

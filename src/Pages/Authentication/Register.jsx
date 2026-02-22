@@ -7,7 +7,9 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import axios from "axios";
 import UseAxiosPublic from "../../Hook/UseAxiosPublic";
+import usePageTitle from "../../Hook/usePageTitle";
 const Register = () => {
+  usePageTitle("Register");
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const Register = () => {
   // upload to imgbb
   const handleImageUpload = async (e) => {
     e.preventDefault();
-    console.log("handle image upload");
+
     const file = e.target.files[0];
     if (!file) return;
 
@@ -35,7 +37,7 @@ const Register = () => {
         `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_Upload_Key}`,
         formData,
       );
-      console.log("image url", res.data.data.url);
+
       setImageUrl(res.data.data.url);
     } catch (err) {
       console.error("Upload failed", err);
@@ -63,17 +65,17 @@ const Register = () => {
           displayName: data.name,
           photoURL: imageUrl,
         };
+
         const userInfo = {
           name: data.name,
           email: data.email,
           role: "user",
+          URL: updateProfile.photoURL,
           createdAt: new Date().toISOString(),
           lastLoginAt: new Date().toISOString(),
         };
 
-        axiosInstance
-          .post("/users", userInfo)
-          .then((res) => console.log("userInfo", res.data));
+        axiosInstance.post("/users", userInfo).then((res) => {});
 
         updateUserProfile(updateProfile);
         toast.success("Registration successful!");
@@ -91,6 +93,7 @@ const Register = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
+
         const userInfo = {
           name: user.displayName,
           email: user.email,
@@ -98,11 +101,17 @@ const Register = () => {
           createdAt: new Date().toISOString(),
           lastLoginAt: new Date().toISOString(),
         };
+        const updateProfile = {
+          name: user.displayName,
+          photoURL: user.photoURL,
+        };
+
         // post user data in db
         axiosInstance
           .post("/users", userInfo)
           .then((res) => console.log("userInfo", res.data));
         toast.success("Wellcome back!");
+        updateUserProfile(updateProfile);
         navigate("/");
       })
       .catch((error) => {

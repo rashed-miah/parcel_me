@@ -1,4 +1,5 @@
 import { useState } from "react";
+import usePageTitle from "../../Hook/usePageTitle";
 
 const tabs = [
   { label: "Story", key: "story" },
@@ -32,6 +33,7 @@ const content = {
 };
 
 export default function AboutUs() {
+  usePageTitle("About");
   const [activeTab, setActiveTab] = useState("story");
 
   return (
