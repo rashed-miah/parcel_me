@@ -23,6 +23,7 @@ const Navbar = () => {
           Coverage
         </NavLink>
       </li>
+
       {user && (
         <li>
           <NavLink className={linkClass} to="/sendparcel">
@@ -46,7 +47,7 @@ const Navbar = () => {
       )}
 
       <li>
-        <NavLink className={linkClass} to="/about">
+        <NavLink className={linkClass} to="/aboutUs">
           About Us
         </NavLink>
       </li>

@@ -24,6 +24,7 @@ import CompletedDeliveries from "../Pages/Dashboard/CompletedDeliveries/Complete
 import RiderRoute from "../Routes/RiderRoute";
 import TrackParcel from "../Pages/TraceParcel/TraceParcel";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
         path: "coverage",
         element: <CoveragePage></CoveragePage>,
         loader: () => fetch("./serviceCenters.json"),
+      },
+      {
+        path: "aboutus",
+        Component: AboutUs,
       },
       {
         path: "forbidden",
